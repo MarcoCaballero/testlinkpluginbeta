@@ -1,6 +1,6 @@
 package com.marcocaballero.exampleclient;
 
-import com.marcocaballero.testlinkpluginbeta.ApiObjectGenerator;
+import com.marcocaballero.testlinkpluginbeta.TestLinkPlugin;
 
 /**
  * API Connector class.
@@ -24,10 +24,11 @@ public class ApiConnector {
 	 */
 	public static void main(String[] args) {
 
-		ApiObjectGenerator objectApi = new ApiObjectGenerator(url, devKey, null, null); // Instantiates the Testlink services
+		TestLinkPlugin plugin = new TestLinkPlugin(url, devKey); // Instantiates the Testlink services
 
-		System.out.println("Api ping:" + objectApi.sayHello()); // Call the API to sayHello
+		System.out.println("Api ping:" + plugin.getProjectService().sayHello()); // Call the API to sayHello
 
-		System.out.println("Api project:" + objectApi.getProjects()[0].getName()); // Display first project name
+		System.out.println("Api project:" + plugin.getProjectService().getProjects()[0].getName()); // Display first
+																									// project name
 	}
 }
