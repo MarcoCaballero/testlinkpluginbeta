@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.marcocaballero.testlinkpluginbeta</groupId>
+  <artifactId>testlink-plugin-beta</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>testlink-plugin-beta</name>
+  <description>Simple link to plug-in testlink.</description>
+   <dependencies>
+		<dependency>
+			<groupId>br.eti.kinoshita</groupId>
+			<artifactId>testlink-java-api</artifactId>
+			<version>1.9.16-1</version>
+		</dependency>
+	</dependencies>
+</project>
