@@ -13,16 +13,7 @@ import io.github.marcocaballero.testlinkpluginbeta.services.TestProjectService;
  *
  */
 public class TestLinkPlugin {
-	/**
-	 * TestLink URL.
-	 */
-	private String url;
-
-	/**
-	 * TestLink User key.
-	 */
-	private String devKey;
-
+	
 	/**
 	 * TestLink API object.
 	 */
@@ -58,9 +49,7 @@ public class TestLinkPlugin {
 	 * @param testlinkURL
 	 */
 	public TestLinkPlugin(String url, String devKey) {
-		this.url = url;
-		this.devKey = devKey;
-		this.connect();
+		this.connect(url, devKey); // Connect Java API
 
 		/* Initialize services */
 		this.projectService = new TestProjectService(this);
@@ -73,7 +62,7 @@ public class TestLinkPlugin {
 	 * the API object
 	 * 
 	 */
-	private void connect() {
+	private void connect(String url, String devKey) {
 		try {
 			testlinkURL = new URL(url);
 		} catch (MalformedURLException mue) {
@@ -94,13 +83,6 @@ public class TestLinkPlugin {
 	 */
 	public TestLinkAPI getApi() {
 		return api;
-	}
-
-	/**
-	 * @param api
-	 */
-	public void setApi(TestLinkAPI api) {
-		this.api = api;
 	}
 
 	/**

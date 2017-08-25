@@ -18,7 +18,7 @@ public class TestLinkInfoService {
 	}
 
 	/**
-	 * @return
+	 * @return the API info
 	 */
 	public String getTestLinkInfo() {
 		return api.about();
