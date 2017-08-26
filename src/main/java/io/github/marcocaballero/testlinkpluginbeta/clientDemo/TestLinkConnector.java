@@ -4,12 +4,12 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestProject;
 import io.github.marcocaballero.testlinkpluginbeta.TestLinkPlugin;
 
 /**
- * API Connector class.
+ * TestLink Connector class.
  * 
  * @author Marco
  *
  */
-public class ApiConnector {
+public class TestLinkConnector {
 	/**
 	 * TestLink-URL
 	 */
@@ -29,13 +29,14 @@ public class ApiConnector {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		System.out.println("TestLink API RPC Info: " + plugin.getInfoService().getTestLinkInfo() + "\n");
 
-		System.out.println("Api ping (alias to say hello): " + plugin.getInfoService().sayHello() + "\n"); // Call the API to
+		System.out.println("TestLink API RPC Info: " + plugin.getTestLinkInfo() + "\n");
+
+		System.out.println("Api ping (alias to say hello): " + plugin.sayHello() + "\n"); // Call the API to
 
 		displaysProjects(); // sayHello
 	}
+
 	private static void displaysProjects() {
 		System.out.println("__________________________________________________________________________________________________________________________________________________________");
 		System.out.println("_________________________________________________________________Test Project Table_______________________________________________________________________");
@@ -44,7 +45,7 @@ public class ApiConnector {
 		System.out.printf("%10s %30s %20s %10s %80s", "PROJECT ID", "PROJECT NAME", "ACTIVE?", "REQS?", "NOTES");
 		System.out.println();
 		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-		for (TestProject project : plugin.getProjectService().getProjects()) {
+		for (TestProject project : plugin.getProjects()) {
 			System.out.format("%10d %30s %20s %10s %80s", project.getId(), project.getName(), project.isActive().toString(), project.isEnableRequirements().toString(), project.getNotes());
 			System.out.println();
 		}

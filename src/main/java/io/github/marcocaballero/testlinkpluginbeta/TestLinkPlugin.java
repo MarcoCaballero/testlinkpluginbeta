@@ -4,36 +4,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
+import br.eti.kinoshita.testlinkjavaapi.model.TestProject;
 import br.eti.kinoshita.testlinkjavaapi.util.TestLinkAPIException;
-import io.github.marcocaballero.testlinkpluginbeta.services.TestLinkInfoService;
-import io.github.marcocaballero.testlinkpluginbeta.services.TestProjectService;
-
 /**
  * @author Marco
  *
  */
 public class TestLinkPlugin {
-	
+
+	/* Fields */
+
 	/**
 	 * TestLink API object.
 	 */
-	private TestLinkAPI api;
+	private TestLinkAPI api = null;
 
 	/**
 	 * TestLink URL object.
 	 */
-	private URL testlinkURL;
-
-	/* Services (non-javadoc) */
-
-	/**
-	 * Test project service
-	 */
-	private TestProjectService projectService;
-	/**
-	 * Test project service
-	 */
-	private TestLinkInfoService infoService;
+	private URL testlinkURL = null;
 
 	/**
 	 * Constructor with parameters.
@@ -45,60 +34,44 @@ public class TestLinkPlugin {
 	 * 
 	 * @param url
 	 * @param devKey
-	 * @param api
-	 * @param testlinkURL
 	 */
 	public TestLinkPlugin(String url, String devKey) {
-		this.connect(url, devKey); // Connect Java API
-
-		/* Initialize services */
-		this.projectService = new TestProjectService(this);
-		this.infoService = new TestLinkInfoService(this);
-	}
-
-	/**
-	 * 
-	 * Creates a URL object from the String representation of the TestLink URL, and Instantiates TestLink services on
-	 * the API object
-	 * 
-	 */
-	private void connect(String url, String devKey) {
 		try {
-			testlinkURL = new URL(url);
+			this.testlinkURL = new URL(url);
 		} catch (MalformedURLException mue) {
 			mue.printStackTrace(System.err);
 			System.exit(-1);
 		}
 
 		try {
-			api = new TestLinkAPI(testlinkURL, devKey);
+			this.api = new TestLinkAPI(testlinkURL, devKey);
 		} catch (TestLinkAPIException te) {
 			te.printStackTrace(System.err);
 			System.exit(-1);
 		}
 	}
-
-	/**
-	 * @return api
-	 */
-	public TestLinkAPI getApi() {
-		return api;
-	}
-
-	/**
-	 * @return project service
-	 */
-	public TestProjectService getProjectService() {
-		return projectService;
-	}
-
-	/**
-	 * @return the info service
-	 */
-	public TestLinkInfoService getInfoService() {
-		return infoService;
-	}
-
 	
+	/**
+	 * @return test projects
+	 */
+	public TestProject[] getProjects() {
+		return this.api.getProjects();
+	}
 	
+	/**
+	 * @return the API info
+	 */
+	public String getTestLinkInfo() {
+		return this.api.about();
+	}
+
+	/**
+	 * ping method is an alias for sayHello.
+	 * 
+	 * @return Hello message
+	 */
+	public String sayHello() {
+		return this.api.ping();
+	}
+
 }
