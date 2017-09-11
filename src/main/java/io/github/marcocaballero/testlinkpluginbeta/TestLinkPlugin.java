@@ -4,12 +4,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
+import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import br.eti.kinoshita.testlinkjavaapi.model.Build;
+import br.eti.kinoshita.testlinkjavaapi.model.ReportTCResultResponse;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import br.eti.kinoshita.testlinkjavaapi.model.TestPlan;
 import br.eti.kinoshita.testlinkjavaapi.model.TestProject;
 import br.eti.kinoshita.testlinkjavaapi.util.TestLinkAPIException;
 
+/**
+ * @author Marco
+ *
+ */
 /**
  * @author Marco
  *
@@ -27,8 +33,7 @@ public class TestLinkPlugin {
 	 * TestLink URL object.
 	 */
 	private URL testlinkURL = null;
-	
-	
+
 	/**
 	 * Constructor with parameters.
 	 * 
@@ -80,30 +85,43 @@ public class TestLinkPlugin {
 	}
 
 	/**
-	 * execute tests
-	 * 
-	 */
-	public void executeTest() {
-//		this.api.reportTCResult(testCaseId, testCaseExternalId, testPlanId, status, buildId, buildName, notes, guess, bugId, platformId, platformName, customFields, overwrite)
-	}
-	
-	/**
+	 * @param projectId
 	 * @return Project Test plans
 	 */
 	public TestPlan[] getProjectTestPlans(Integer projectId) {
 		return this.api.getProjectTestPlans(projectId);
 	}
-	
+
 	/**
+	 * @param testPlanId
 	 * @return Test plans builds
 	 */
 	public Build[] getTestPlansBuilds(Integer testPlanId) {
 		return this.api.getBuildsForTestPlan(testPlanId);
 	}
-	
-	public TestCase[] getTestCasesForTestPlan(Integer testPlanId, Integer buildId){
+
+	/**
+	 * @param testPlanId
+	 * @param buildId
+	 * @return
+	 */
+	public TestCase[] getTestCasesForTestPlan(Integer testPlanId, Integer buildId) {
 		return this.api.getTestCasesForTestPlan(testPlanId, null, buildId, null, null, null, null, null, null, true, null);
 	}
-	
+
+	/**
+	 * @param testCaseId
+	 * @param testPlanId
+	 * @param buildId
+	 * @param notes
+	 * @param status
+	 * 
+	 *            Reports a TestCase result.
+	 */
+	public void executeTest(Integer testCaseId, Integer testPlanId, Integer buildId, String notes, ExecutionStatus status) {
+		ReportTCResultResponse response = this.api.reportTCResult(testCaseId, null, testPlanId, status, buildId, null, notes, null, null, null, null, null, null);
+
+		System.out.println("PLUGIN INFO, TEST RESULT RESPONSE: " + response.getMessage());
+	}
 
 }
